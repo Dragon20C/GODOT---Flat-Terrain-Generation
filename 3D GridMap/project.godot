@@ -16,12 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="3D GridMap"
-run/main_scene="res://World.tscn"
+run/main_scene="res://Scenes/World.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://Global.gd"
+Global="*res://Scenes/Global.gd"
 
 [display]
 
