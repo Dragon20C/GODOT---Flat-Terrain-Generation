@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Models/3DTiles.res" type="MeshLibrary" id=1]
+[ext_resource path="res://3DTiles.res" type="MeshLibrary" id=1]
 [ext_resource path="res://Models/3DItems.res" type="MeshLibrary" id=2]
 [ext_resource path="res://Scenes/MapGen.gd" type="Script" id=3]
 

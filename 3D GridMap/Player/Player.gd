@@ -9,7 +9,7 @@ func _ready():
 	pass
 	
 func _input(event):
-		if event is InputEventMouseMotion:
+		if event is InputEventMouseMotion and focus:
 			rotation_degrees.y  -= event.relative.x * mouse_sensitivity
 			$Head.rotation_degrees.x = clamp($Head.rotation_degrees.x - event.relative.y * mouse_sensitivity, -90,90)
 		
@@ -25,17 +25,17 @@ func _process(delta):
 
 func _physics_process(delta):
 	movement = Vector3()
-	if Input.is_action_pressed("w"):
+	if Input.is_action_pressed("w") and focus:
 		movement -= transform.basis.z
-	if Input.is_action_pressed("a"):
+	if Input.is_action_pressed("a") and focus:
 		movement -= transform.basis.x
-	if Input.is_action_pressed("s"):
+	if Input.is_action_pressed("s") and focus:
 		movement += transform.basis.z
-	if Input.is_action_pressed("d"):
+	if Input.is_action_pressed("d") and focus:
 		movement += transform.basis.x
-	if Input.is_action_pressed("Up"):
+	if Input.is_action_pressed("Up") and focus:
 		movement += transform.basis.y
-	if Input.is_action_pressed("Down"):
+	if Input.is_action_pressed("Down") and focus:
 		movement -= transform.basis.y
 		
-	move_and_slide(movement * 15,Vector3.UP)
+	move_and_slide(movement * 20,Vector3.UP)

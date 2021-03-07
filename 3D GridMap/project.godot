@@ -17,7 +17,6 @@ _global_script_class_icons={
 
 config/name="3D GridMap"
 run/main_scene="res://Scenes/World.tscn"
-config/icon="res://icon.png"
 
 [autoload]
 
@@ -69,5 +68,5 @@ randomise={
 
 [rendering]
 
-quality/filters/msaa=1
+quality/filters/msaa=2
 environment/default_environment="res://default_env.tres"
