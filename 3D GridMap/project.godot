@@ -20,7 +20,7 @@ run/main_scene="res://Scenes/World.tscn"
 
 [autoload]
 
-Global="*res://Scenes/Global.gd"
+Global="*res://Scripts/Global.gd"
 
 [display]
 

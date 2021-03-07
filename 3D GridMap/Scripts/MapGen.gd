@@ -1,23 +1,31 @@
 extends Spatial
 
 var noise = OpenSimplexNoise.new()
-var freq = 2
-var amplitude = 40
-var size = 35 # 320
+const size = 30
 var tile_selection
 onready var gridmap = $GridMap
 onready var GridItems = $GridItems
 onready var player = get_node("/root/World/Player")
+onready var world = get_node("/root/World/")
+
 func _ready():
-	gridmap.translation = Vector3(player.translation.x, 0,player.translation.z) - Vector3(size/2,0,size/2)
-	GridItems.translation = Vector3(player.translation.x, 0,player.translation.z) - Vector3(size/2,0,size/2)
+	#gridmap.translation = Vector3(world.chunk_pos.x * size, 0,world.chunk_pos.y * size)
+	#GridItems.translation = Vector3(world.chunk_pos.x * size, 0,world.chunk_pos.y * size)
+	#gridmap.translation = Vector3(player.translation.x, 0,player.translation.z) - Vector3(size/2,0,size/2)
+	#GridItems.translation = Vector3(player.translation.x, 0,player.translation.z) - Vector3(size/2,0,size/2)
 	var RNG = Global.RNG
 	noise.seed = RNG
-	terrain_generation()
-	generate_nature()
 	
-func terrain_generation():
-	var pos = global_transform.origin
+func chunk_position_set(set_pos):
+	gridmap.translation = set_pos
+	GridItems.translation = set_pos
+	terrain_generation(set_pos)
+	generate_nature(set_pos)
+	
+	
+func terrain_generation(position):
+	var pos = Vector3(position.x, 0,position.z)
+	#var pos = Vector3(player.translation.x, 0,player.translation.z)
 	for x in range(size):
 		for y in range(size):
 			var height = noise.get_noise_2d((pos.x + x) /1.5, (pos.z + y)/1.5) * 2
@@ -34,8 +42,10 @@ func terrain_generation():
 			else:
 				tile_selection = 0 # Grass
 			gridmap.set_cell_item(x,0,y,tile_selection)
-func generate_nature():
-	var pos = global_transform.origin
+			
+func generate_nature(position):
+	var pos = Vector3(position.x, 0,position.z)
+	#var pos = Vector3(player.translation.x, 0,player.translation.z)
 	for x in range(size):
 		for y in range(size):
 			var chance = randi() % 100 + 1

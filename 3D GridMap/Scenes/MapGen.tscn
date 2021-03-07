@@ -2,7 +2,8 @@
 
 [ext_resource path="res://3DTiles.res" type="MeshLibrary" id=1]
 [ext_resource path="res://Models/3DItems.res" type="MeshLibrary" id=2]
-[ext_resource path="res://Scenes/MapGen.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/MapGen.gd" type="Script" id=3]
+
 
 [node name="MapGen" type="Spatial"]
 script = ExtResource( 3 )
