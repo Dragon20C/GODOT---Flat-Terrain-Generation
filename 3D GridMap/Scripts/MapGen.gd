@@ -1,7 +1,7 @@
 extends Spatial
 
 var noise = OpenSimplexNoise.new()
-const size = 15
+const size = 30
 var tile_selection
 onready var gridmap = $GridMap
 onready var GridItems = $GridItems
@@ -17,8 +17,7 @@ func _ready():
 	noise.seed = RNG
 	
 func chunk_position_set(set_pos):
-	gridmap.translation = set_pos
-	GridItems.translation = set_pos
+	translation = set_pos
 	terrain_generation(set_pos)
 	generate_nature(set_pos)
 	

@@ -6,8 +6,17 @@ onready var player = get_node("/root/World/Player")
 onready var chunk_local_cube = $Chunk_local
 var chunk_x = 1
 var chunk_z = 1
+var playeroffset = Vector2(-75,-75)
 var chunk_pos = Vector2()
 var previous_chunks = []
+
+func _ready():
+	for x in range(5):
+		for y in range(5):
+			var instance = chunk_scene.instance()
+			add_child(instance)
+			instance.chunk_position_set(Vector3(x * chunk.size + playeroffset.x,0,y * chunk.size + playeroffset.y))
+			previous_chunks.append(chunk_pos)
 	
 func _process(delta):
 	chunk_local_cube.translation = Vector3(chunk_pos.x * chunk.size,0,chunk_pos.y * chunk.size)
