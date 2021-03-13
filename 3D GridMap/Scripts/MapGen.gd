@@ -1,7 +1,7 @@
 extends Spatial
 
 var noise = OpenSimplexNoise.new()
-const size = 30
+const size = 15
 var tile_selection
 onready var gridmap = $GridMap
 onready var GridItems = $GridItems
@@ -29,12 +29,14 @@ func terrain_generation(position):
 	for x in range(size):
 		for y in range(size):
 			var height = noise.get_noise_2d((pos.x + x) /1.5, (pos.z + y)/1.5) * 2
-			if height > -0.25 and height < 0:
+			if height > -0.30 and height < -0.20:
 				tile_selection = 2 #Water
-			elif height < -0.25:
+			elif height < -0.30:
 				tile_selection = 4 #Dark Water
-			elif height > 0 and height < 0.1:
+			elif height > -0.20 and height < -0.1:
 				tile_selection = 1 # Sand
+			elif height > -0.1 and height < 0.4:
+				tile_selection = 0 # Grass
 			elif height < 0.8 and height > 0.4:
 				tile_selection = 5 # Dark Grass
 			elif height > 0.8:
@@ -50,13 +52,12 @@ func generate_nature(position):
 		for y in range(size):
 			var chance = randi() % 100 + 1
 			var height = noise.get_noise_2d((pos.x + x) /1.5, (pos.z + y)/1.5) * 2
-			if height > -0.25 and height < 0:
+			if height > -0.30 and height < -0.20:
 				if chance < 0:
 					tile_selection = 0 #Water
-			elif height < -0.25:
+			elif height < -0.30:
 				if chance < 0:
 					tile_selection = 0 #Dark Water
-
 			if height < 0.8 and height > 0.4:
 				if chance <= 12 and chance > 5:
 					tile_selection = 0 # Dark Grass
@@ -64,7 +65,7 @@ func generate_nature(position):
 				elif chance <= 3:
 					tile_selection = 2 # Rocks
 					GridItems.set_cell_item(x,0,y,tile_selection)
-			elif height > 0 and height < 0.1:
+			elif height > -0.20 and height < -0.1:
 				if chance < 10:
 					tile_selection = 3 # Cactus
 					GridItems.set_cell_item(x,0,y,tile_selection)
@@ -72,9 +73,9 @@ func generate_nature(position):
 				if chance < 10:
 					tile_selection = 1 # snow
 					GridItems.set_cell_item(x,0,y,tile_selection)
-			elif height < 0.8 and height > 0:
+			elif height > -0.1 and height < 0.4:
 				if chance < 6 and chance > 3:
-					tile_selection = 0 # Grass
+					tile_selection = 0 # tree
 					GridItems.set_cell_item(x,0,y,tile_selection)
 				elif chance <= 3:
 					tile_selection = 2 # Rocks

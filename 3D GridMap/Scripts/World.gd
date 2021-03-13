@@ -8,15 +8,6 @@ var chunk_x = 1
 var chunk_z = 1
 var chunk_pos = Vector2()
 var previous_chunks = []
-var chunk_dict = {"position1": Vector2(chunk_pos.x,chunk_pos.y + 3),
-"position2": Vector2(chunk_pos.x,chunk_pos.y + 2),
-"position3": Vector2(chunk_pos.x,chunk_pos.y + 1)}
-func _ready():
-	for x in chunk_dict.size():
-		var instance = chunk_scene.instance()
-		add_child(instance)
-		instance.chunk_position_set(Vector3(chunk_pos.x * chunk.size,0,x * chunk.size))
-		previous_chunks.append(Vector2(chunk_pos.x,x))
 	
 func _process(delta):
 	chunk_local_cube.translation = Vector3(chunk_pos.x * chunk.size,0,chunk_pos.y * chunk.size)
